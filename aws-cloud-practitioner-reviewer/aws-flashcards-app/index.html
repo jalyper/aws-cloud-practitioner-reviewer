@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Practitioner Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="start-screen" class="container">
+        <h1>AWS Practitioner Quiz</h1>
+        <p class="instructions">Select the number of questions for your quiz.</p>
+        <div class="start-options">
+            <button class="start-btn" data-count="15">15 Questions</button>
+            <button class="start-btn" data-count="30">30 Questions</button>
+            <button class="start-btn" data-count="45">45 Questions</button>
+        </div>
+    </div>
+
+    <div id="quiz-container" class="container" style="display: none;">
+        <div class="quiz-header">
+            <h1>AWS Practitioner Quiz</h1>
+            <div class="score-container">
+                <span id="question-progress"></span>
+                <span>Score: <span id="score">0</span></span>
+            </div>
+        </div>
+        
+        <div class="quiz-body">
+            <h2 id="question"></h2>
+            <div id="options-container" class="options-container">
+                <!-- Options will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div id="explanation-container" class="explanation-container" style="display: none;">
+             <p id="explanation"></p>
+        </div>
+
+        <div class="quiz-footer">
+            <button id="next-btn" style="display: none;">Next Question</button>
+        </div>
+         <p id="final-message" class="final-message" style="display: none;"></p>
+    </div>
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
