@@ -613,5 +613,451 @@ const questions = [
         options: ["They pay a fixed termination fee.", "They continue to pay for their reserved capacity.", "They stop paying for all services.", "They pay only for the resources they are still using (if any)."],
         correctAnswer: "They pay only for the resources they are still using (if any).",
         explanation: "With the pay-as-you-go model, you only pay for the services you consume. If you terminate all your resources, you stop incurring charges (with the exception of any active subscriptions or reservations)."
+    },
+
+    // ################# ADDITIONAL PRACTICE QUESTIONS #################
+    
+    // Database Service Comparisons
+    {
+        domain: "Technology",
+        question: "A company needs a database for a mobile gaming application that will have unpredictable traffic patterns and requires single-digit millisecond response times. Which database service is most appropriate?",
+        options: ["Amazon RDS", "Amazon Aurora", "Amazon DynamoDB", "Amazon DocumentDB"],
+        correctAnswer: "Amazon DynamoDB",
+        explanation: "<b>Amazon DynamoDB</b> is purpose-built for applications that need single-digit millisecond latency at any scale. It's serverless and automatically scales up and down, making it ideal for gaming applications with unpredictable traffic."
+    },
+    {
+        domain: "Technology", 
+        question: "A startup is building a traditional e-commerce application that requires complex queries, joins, and ACID transactions. They want a managed database that can automatically scale storage. Which service should they choose?",
+        options: ["Amazon DynamoDB", "Amazon Aurora", "Amazon DocumentDB", "Amazon ElastiCache"],
+        correctAnswer: "Amazon Aurora",
+        explanation: "<b>Amazon Aurora</b> is a MySQL and PostgreSQL-compatible relational database that automatically scales storage up to 128 TB, provides ACID transactions, and supports complex SQL queries and joins needed for traditional applications."
+    },
+    {
+        domain: "Technology",
+        question: "A company is migrating from MongoDB and needs a fully managed document database that's compatible with MongoDB APIs. Which AWS service should they use?",
+        options: ["Amazon RDS", "Amazon DynamoDB", "Amazon DocumentDB", "Amazon Aurora"],
+        correctAnswer: "Amazon DocumentDB",
+        explanation: "<b>Amazon DocumentDB</b> is a fully managed document database service that supports MongoDB workloads and APIs, making it ideal for migrations from on-premises MongoDB deployments."
+    },
+    {
+        domain: "Technology",
+        question: "A financial services company needs a relational database with strict compliance requirements and wants full control over database engine configuration, patches, and updates. Which service provides this level of control?",
+        options: ["Amazon Aurora Serverless", "Amazon DynamoDB", "Amazon RDS", "Amazon DocumentDB"],
+        correctAnswer: "Amazon RDS",
+        explanation: "<b>Amazon RDS</b> gives you more control over the database engine compared to Aurora, allowing you to manage patches, updates, and specific configurations while still being managed infrastructure."
+    },
+    
+    // Security Best Practices
+    {
+        domain: "Security and Compliance",
+        question: "Which security practice should be implemented to ensure that even AWS administrators cannot access your encrypted data?",
+        options: ["Enable AWS CloudTrail logging", "Use customer-managed keys in AWS KMS", "Enable MFA on the root account", "Create separate IAM policies for each user"],
+        correctAnswer: "Use customer-managed keys in AWS KMS",
+        explanation: "With <b>customer-managed keys in AWS KMS</b>, you control the encryption keys. AWS administrators cannot access your encrypted data because they don't have access to your encryption keys, ensuring client-side encryption control."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "A company wants to ensure that their EC2 instances can only be accessed from their corporate network and never from the public internet. What is the most secure approach?",
+        options: ["Use Security Groups to allow only port 22", "Deploy instances in private subnets with no internet gateway", "Enable AWS Shield Advanced", "Use Network ACLs to block all traffic"],
+        correctAnswer: "Deploy instances in private subnets with no internet gateway",
+        explanation: "Deploying instances in <b>private subnets</b> ensures they have no direct internet connectivity. Combined with VPN or Direct Connect from the corporate network, this provides the most secure isolation from public internet access."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "What is the security best practice for handling application secrets like database passwords in EC2 instances?",
+        options: ["Store them in environment variables", "Hard-code them in the application", "Store them in AWS Secrets Manager and retrieve them programmatically", "Store them in S3 buckets"],
+        correctAnswer: "Store them in AWS Secrets Manager and retrieve them programmatically",
+        explanation: "<b>AWS Secrets Manager</b> securely stores, rotates, and manages access to secrets. Applications should retrieve secrets programmatically at runtime rather than storing them in code or environment variables."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "A company wants to monitor and get alerts when someone creates new IAM users or changes IAM policies. Which service combination provides this capability?",
+        options: ["AWS Config + Amazon SNS", "AWS CloudTrail + Amazon CloudWatch", "Amazon GuardDuty + AWS Lambda", "AWS Trusted Advisor + Amazon SES"],
+        correctAnswer: "AWS CloudTrail + Amazon CloudWatch",
+        explanation: "<b>AWS CloudTrail</b> logs all API calls including IAM changes. <b>Amazon CloudWatch</b> can create alarms based on CloudTrail events and send notifications when specific IAM actions occur."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "Which AWS service helps detect potentially compromised instances by analyzing VPC Flow Logs, DNS logs, and CloudTrail events?",
+        options: ["AWS Config", "Amazon Inspector", "Amazon GuardDuty", "AWS Security Hub"],
+        correctAnswer: "Amazon GuardDuty",
+        explanation: "<b>Amazon GuardDuty</b> is a threat detection service that uses machine learning to analyze VPC Flow Logs, DNS logs, and CloudTrail events to identify potentially malicious activity and compromised instances."
+    },
+    
+    // Edge Locations and Content Delivery
+    {
+        domain: "Technology",
+        question: "A global media company wants to deliver video content to users worldwide with the lowest possible latency. Which AWS service and strategy should they use?",
+        options: ["Store all content in a single S3 region", "Use Amazon CloudFront with multiple edge locations", "Deploy EC2 instances in every AWS region", "Use Amazon EFS with regional replication"],
+        correctAnswer: "Use Amazon CloudFront with multiple edge locations",
+        explanation: "<b>Amazon CloudFront</b> with edge locations caches content closer to end-users globally, dramatically reducing latency for content delivery. Edge locations are separate from AWS regions and provide faster access."
+    },
+    {
+        domain: "Cloud Concepts",
+        question: "How do edge locations benefit global application performance differently than AWS Regions?",
+        options: ["Edge locations provide compute services while Regions only provide storage", "Edge locations cache content closer to users while Regions host the origin infrastructure", "Edge locations are cheaper than Regions for all services", "Edge locations provide better security than Regions"],
+        correctAnswer: "Edge locations cache content closer to users while Regions host the origin infrastructure",
+        explanation: "Edge locations are part of CloudFront's CDN and cache static content closer to end-users for faster delivery. AWS Regions host the origin servers and full range of AWS services, while edge locations focus on content caching and delivery."
+    },
+    {
+        domain: "Technology",
+        question: "A company has a dynamic web application that serves both static assets (images, CSS) and dynamic content (user data). What's the best strategy for optimal performance?",
+        options: ["Store everything in one S3 bucket", "Use CloudFront for static content and direct Region access for dynamic content", "Use only EC2 instances with local storage", "Store all content in Amazon EFS"],
+        correctAnswer: "Use CloudFront for static content and direct Region access for dynamic content",
+        explanation: "This is the optimal hybrid approach: <b>CloudFront</b> caches and delivers static assets from edge locations for speed, while dynamic content is served directly from the origin (Region) since it can't be effectively cached."
+    },
+    {
+        domain: "Technology",
+        question: "Which scenario would benefit MOST from AWS Global Accelerator rather than CloudFront?",
+        options: ["Serving static website content", "Caching frequently accessed images", "Improving performance for non-HTTP protocols like gaming or VoIP", "Storing and retrieving large files"],
+        correctAnswer: "Improving performance for non-HTTP protocols like gaming or VoIP",
+        explanation: "<b>AWS Global Accelerator</b> improves performance for any application using TCP or UDP protocols by routing traffic through AWS's global network. CloudFront is specifically for HTTP/HTTPS content delivery and caching."
+    },
+    {
+        domain: "Cloud Concepts",
+        question: "A company wants to ensure their disaster recovery strategy takes advantage of AWS's global infrastructure. What is a key benefit of multi-region deployment?",
+        options: ["Lower costs in all regions", "Automatic failover without any configuration", "Geographic distribution reduces risk of total service loss", "Faster development cycles"],
+        correctAnswer: "Geographic distribution reduces risk of total service loss",
+        explanation: "Multi-region deployment provides <b>geographic redundancy</b>, ensuring that if an entire region becomes unavailable due to natural disasters or other issues, your application can continue running from another region."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "Which security benefit does using multiple AWS Availability Zones within a region provide?",
+        options: ["Lower costs for security services", "Automatic encryption of data in transit", "Fault tolerance and high availability for applications", "Compliance with all global regulations"],
+        correctAnswer: "Fault tolerance and high availability for applications",
+        explanation: "Deploying across multiple <b>Availability Zones</b> within a region provides fault tolerance and high availability. If one AZ experiences issues, your application can continue running from other AZs in the same region."
+    },
+
+    // ################# MIGRATION & CAF QUESTIONS FROM IMAGES #################
+    
+    {
+        domain: "Cloud Concepts",
+        question: "The migration team wants to make sure the organization considers a company-wide change management strategy for successful cloud adoption. Which Cloud Adoption Framework (CAF) perspective would they use?",
+        options: ["People", "Business", "Security", "Operations"],
+        correctAnswer: "People",
+        explanation: "The <b>People perspective</b> of the AWS CAF focuses on change management, workforce transformation, and organizational change readiness - exactly what's needed for company-wide adoption strategies."
+    },
+    {
+        domain: "Technology",
+        question: "During their upcoming migration, the database administrator would like to move from their current database to an AWS managed database to offload some of the database administration. They would also like to use a tool to plan, assess, convert, and migrate the database. Which migration solution would BEST meet their needs?",
+        options: ["AWS Migration Hub", "AWS Schema Conversion Tool (AWS SCT)", "AWS Database Migration Service (AWS DMS)", "Migration Evaluator"],
+        correctAnswer: "AWS Database Migration Service (AWS DMS)",
+        explanation: "<b>AWS Database Migration Service (AWS DMS)</b> helps migrate databases to AWS with minimal downtime. It can plan, assess, convert schemas, and migrate data from various database engines to AWS managed databases."
+    },
+    {
+        domain: "Cloud Concepts", 
+        question: "What are the seven migration strategies that are commonly used when customers migrate to the AWS Cloud?",
+        options: [
+            "Relocate, Rehost, Replatform, Refactor, Repurchase, Retain, and Retire",
+            "There are not seven, there are three (Assess, Mobilize, and Migrate and Modernize)",
+            "Relocate, Remediate, Retrofit, Refactor, Regrade, Retool, Remove", 
+            "Business, People, Governance, Platform, Security, Operations, IT"
+        ],
+        correctAnswer: "Relocate, Rehost, Replatform, Refactor, Repurchase, Retain, and Retire",
+        explanation: "The <b>7 R's of migration</b> are the seven common strategies: <b>Relocate</b> (VMware to AWS), <b>Rehost</b> (lift-and-shift), <b>Replatform</b> (lift-tinker-shift), <b>Refactor</b> (re-architect), <b>Repurchase</b> (move to SaaS), <b>Retain</b> (keep on-premises), and <b>Retire</b> (decommission)."
+    },
+    {
+        domain: "Technology",
+        question: "A media company is in the migrate and modernize phase of their migration and wants a centralized location to view their migration tasks and progress. Which migration service would BEST meet their needs?",
+        options: ["Migration Evaluator", "AWS Application Discovery Service", "AWS Application Migration Service", "AWS Migration Hub"],
+        correctAnswer: "AWS Migration Hub",
+        explanation: "<b>AWS Migration Hub</b> provides a central location to track the progress of application migrations across multiple AWS and partner solutions. It gives you a single place to discover existing servers, plan migrations, and track the status of each application migration."
+    },
+
+    // ################# ADDITIONAL MIGRATION & NETWORKING QUESTIONS #################
+    
+    {
+        domain: "Cloud Concepts",
+        question: "A retail company is just getting starting with their migration to the AWS Cloud. They need help building a business case to secure funding from their chief financial officer (CFO) and stakeholders. Which migration service would BEST meet their needs?",
+        options: ["Migration Evaluator", "AWS Application Migration Service", "AWS Application Discovery Service", "AWS Migration Hub"],
+        correctAnswer: "Migration Evaluator",
+        explanation: "<b>Migration Evaluator</b> (formerly TSO Logic) helps organizations build a data-driven business case for AWS by providing cost projections, savings estimates, and detailed assessments to present to executives and stakeholders."
+    },
+    {
+        domain: "Technology",
+        question: "An engineering company is migrating large amounts of proprietary intellectual property design files from their on-premises data center to the AWS Cloud. They want a service that has fully managed support for secure file transfers with several different protocols, like Secure File Transfer Protocol (SFTP) and File Transfer Protocol Secure (FTPS). Which online migration solution would meet their needs?",
+        options: ["AWS Direct Connect", "AWS DataSync", "AWS Transfer Family", "AWS Snowball Edge Storage Optimized Devices"],
+        correctAnswer: "AWS Transfer Family",
+        explanation: "<b>AWS Transfer Family</b> is a fully managed service that supports secure file transfers using SFTP, FTPS, and FTP protocols directly into and out of Amazon S3 or Amazon EFS, making it perfect for secure file transfer workflows."
+    },
+    {
+        domain: "Technology",
+        question: "A credit card company is migrating large amounts of sensitive data from their on-premises storage to the AWS Cloud. They want to automate the process and schedule the migration during off peak times. They also want to be able to check on progress and task reporting. They do not have a dedicated private connection between their data center and the AWS Cloud. Which online migration solution would meet their needs?",
+        options: ["AWS Transfer Family", "AWS Snowball Edge Storage Optimized Devices", "AWS DataSync", "Virtual private gateway"],
+        correctAnswer: "AWS DataSync",
+        explanation: "<b>AWS DataSync</b> is an online data transfer service that automates and accelerates moving data between on-premises and AWS. It provides scheduling, progress monitoring, and detailed reporting capabilities over internet connections."
+    },
+    {
+        domain: "Technology",
+        question: "A customer is exploring solutions to establish secure, encrypted connections between their on-premises networks at their data centers and branch offices. They are looking for the MOST cost-effective way to connect their office sites to other sites and their AWS services. They are not looking to increase the amount of bandwidth. Which solution would BEST meet their needs?",
+        options: ["AWS Client VPN", "AWS PrivateLink", "AWS Site-to-Site VPN", "AWS Direct Connect"],
+        correctAnswer: "AWS Site-to-Site VPN",
+        explanation: "<b>AWS Site-to-Site VPN</b> is the most cost-effective solution for secure, encrypted connections between on-premises networks and AWS over the internet. It doesn't require dedicated hardware like Direct Connect, making it more affordable."
+    },
+    {
+        domain: "Technology",
+        question: "A customer wants a way to establish a dedicated connection from their on-premises network to an Amazon VPC. They need a solution that provides a more consistent network experience with increased bandwidth. Which type of connection to the AWS Cloud would BEST meet their needs?",
+        options: ["Internet gateway", "Virtual private gateway", "Amazon CloudFront", "AWS Direct Connect"],
+        correctAnswer: "AWS Direct Connect",
+        explanation: "<b>AWS Direct Connect</b> provides a dedicated, private connection from your on-premises network to AWS with consistent network performance, higher bandwidth options, and reduced network costs compared to internet-based connections."
+    },
+    {
+        domain: "Technology",
+        question: "What is the primary function of a domain name service (DNS)?",
+        options: [
+            "It translates human-readable domain names to machine readable IP addresses.",
+            "It filters inbound and outbound traffic to Amazon EC2 instances in a virtual private cloud (VPC).", 
+            "It provisions a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.",
+            "It allows you to create a subsection of a virtual private cloud (VPC) where you can isolate resources and control access."
+        ],
+        correctAnswer: "It translates human-readable domain names to machine readable IP addresses.",
+        explanation: "<b>DNS (Domain Name Service)</b> is a fundamental internet service that translates human-friendly domain names (like amazon.com) into machine-readable IP addresses (like 192.0.2.1) that computers use to locate and connect to services."
+    },
+
+    // ################# ADDITIONAL NETWORKING & MIGRATION QUESTIONS #################
+    
+    {
+        domain: "Cloud Concepts",
+        question: "An environmental agency is migrating their applications to the AWS Cloud. During the migration they also want to look for ways to modernize and reduce costs of their applications. Which migration service would BEST meet their needs?",
+        options: ["Migration Evaluator", "AWS Application Discovery Service", "AWS Migration Hub", "AWS Application Migration Service"],
+        correctAnswer: "AWS Application Discovery Service",
+        explanation: "<b>AWS Application Discovery Service</b> helps enterprises plan migration projects by gathering information about their on-premises data centers, including server utilization and dependency mapping, which helps identify modernization opportunities and cost reduction strategies."
+    },
+    {
+        domain: "Technology",
+        question: "What is networking in the AWS Cloud?",
+        options: [
+            "Logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define",
+            "Physically isolated data centers or set of data centers within an AWS Region", 
+            "Interconnected devices that can exchange data and resources",
+            "System that translates readable domain names to IP addresses"
+        ],
+        correctAnswer: "Interconnected devices that can exchange data and resources",
+        explanation: "<b>Networking in the AWS Cloud</b> refers to the interconnected infrastructure that allows devices, services, and resources to communicate and exchange data, enabling distributed applications and services to work together across the AWS infrastructure."
+    },
+    {
+        domain: "Technology",
+        question: "A customer is creating an Amazon VPC for their application. They want to create a private segment in the Amazon VPC so that resources launched can be isolated from users on the internet. Which network component would BEST meet their needs?",
+        options: ["A public subnet", "An Availability Zone instead of a subnet", "Either a public subnet or a private subnet would work", "A private subnet"],
+        correctAnswer: "A private subnet",
+        explanation: "A <b>private subnet</b> is a range of IP addresses in your VPC that doesn't have a route to an internet gateway, ensuring that resources launched in it cannot be directly accessed from the internet, providing the isolation they need."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "A retail customer is hosting their application in an Amazon VPC and wants to configure traffic rules for the Amazon EC2 instances running in a public subnet. The application requires multiple rules to be defined at the instance level. Which solution or feature would meet their needs?",
+        options: [
+            "Set up network access control lists (network ACLs) for the Amazon EC2 instances based on the application requirements.",
+            "Set up security groups for the Amazon EC2 instances based on the application requirements.", 
+            "Change the public subnet to a private subnet to avoid public internet access.",
+            "Set up a virtual private gateway based on the application requirements."
+        ],
+        correctAnswer: "Set up security groups for the Amazon EC2 instances based on the application requirements.",
+        explanation: "<b>Security Groups</b> act as virtual firewalls at the instance level and support multiple rules for controlling inbound and outbound traffic. They are stateful and ideal for instance-level traffic control with multiple rules."
+    },
+    {
+        domain: "Technology",
+        question: "A financial customer needs a content delivery solution to deliver required training videos and static content to their financial consultants worldwide. They want to make sure the solution provides low latency. Which AWS solution would BEST meet their needs?",
+        options: ["Amazon CloudFront", "Amazon Route 53", "AWS Direct Connect", "AWS Global Accelerator"],
+        correctAnswer: "Amazon CloudFront",
+        explanation: "<b>Amazon CloudFront</b> is AWS's content delivery network (CDN) that caches and delivers static content like videos and training materials from edge locations worldwide, providing low latency access to global users."
+    },
+    {
+        domain: "Technology",
+        question: "A media company needs a service to manage their domain registrations with different providers. They will also be using the service to route internet traffic to their resources hosted both in the AWS Cloud and elsewhere. Which AWS solution would BEST meet their needs?",
+        options: ["Amazon Route 53", "AWS Direct Connect", "Amazon CloudFront", "AWS Global Accelerator"],
+        correctAnswer: "Amazon Route 53",
+        explanation: "<b>Amazon Route 53</b> is AWS's scalable DNS service that can manage domain registrations and route internet traffic to AWS resources and external endpoints, providing both domain management and traffic routing capabilities."
+    },
+
+    // ################# ADDITIONAL VPN & NETWORKING QUESTIONS #################
+    
+    {
+        domain: "Technology",
+        question: "An enterprise customer just merged with another company and needs a way to quickly scale and provide a way for the new worldwide sales force to access their AWS resources. They want a fully managed service with advanced authentication for their new remote workers. Which solution would BEST meet their needs?",
+        options: ["AWS PrivateLink", "AWS Direct Connect", "AWS Site-to-Site VPN", "AWS Client VPN"],
+        correctAnswer: "AWS Client VPN",
+        explanation: "<b>AWS Client VPN</b> is a fully managed service that provides secure remote access to AWS resources and on-premises networks. It supports advanced authentication methods and can quickly scale to support many remote users worldwide."
+    },
+    {
+        domain: "Technology",
+        question: "A company wants to establish a secure, private connection between their on-premises data center and their Amazon VPC to create a hybrid cloud architecture. Which component should they use to help ensure a secure connection?",
+        options: ["Route table", "Virtual private gateway", "Internet gateway", "Subnet"],
+        correctAnswer: "Virtual private gateway",
+        explanation: "A <b>Virtual Private Gateway</b> is the VPN concentrator on the Amazon side of the VPN connection between your VPC and your on-premises network. It's required to establish Site-to-Site VPN connections for hybrid cloud architectures."
+    },
+    {
+        domain: "Security and Compliance",
+        question: "A customer is creating their application resources in their virtual private cloud (VPC) subnets. They want to secure their resources in the cloud, specifically the networking traffic protection tasks. Which component is the customer responsible for, based on the shared responsibility model?",
+        options: [
+            "Securing access to the AWS data centers and facilities that run AWS Cloud services",
+            "Securing the hardware that runs the AWS Cloud services",
+            "Securing the software that runs the AWS Cloud services", 
+            "Securing network traffic with the subnets and resources with Network access control lists (network ACLs) and security groups"
+        ],
+        correctAnswer: "Securing network traffic with the subnets and resources with Network access control lists (network ACLs) and security groups",
+        explanation: "Under the AWS Shared Responsibility Model, customers are responsible for security <b>in</b> the cloud, which includes configuring network security controls like NACLs and Security Groups to protect their applications and data."
+    },
+    {
+        domain: "Technology", 
+        question: "A customer is exploring edge networking services to improve application availability, performance, and security. They need a solution for traffic routing when something goes wrong in one of their application's locations. Specifically, it takes into account the endpoint health, user location, and policies. Which AWS solution would BEST meet their needs?",
+        options: ["Amazon Route 53", "Amazon CloudFront", "AWS Direct Connect", "AWS Global Accelerator"],
+        correctAnswer: "Amazon Route 53",
+        explanation: "<b>Amazon Route 53</b> provides intelligent traffic routing based on health checks, geographic location, latency, and routing policies. It can automatically route traffic away from unhealthy endpoints to healthy ones, making it ideal for improving application availability and performance."
+    },
+
+    // ################# ADDITIONAL APPLICATION & SERVICE QUESTIONS #################
+    
+    {
+        domain: "Technology",
+        question: "The owner of a large hardware company wants to automate and optimize the company's marketing emails to enhance customer engagement. Which AWS service would work well for this use case?",
+        options: ["Amazon AppStream 2.0", "AWS Amplify", "Amazon Simple Email Service (Amazon SES)", "Amazon Connect"],
+        correctAnswer: "Amazon Simple Email Service (Amazon SES)",
+        explanation: "<b>Amazon SES</b> is a scalable email service designed for marketing communications, transactional emails, and bulk email sending. It provides features for optimizing email delivery rates and managing customer engagement."
+    },
+    {
+        domain: "Technology",
+        question: "A developer is working on a full-stack application hosted on AWS. They are interested in streamlining the development process by quickly adding features like authentication and storage with minimal infrastructure management. Which AWS service would provide the best solution for the developer's needs?",
+        options: ["AWS Amplify", "AWS Well-Architected Tool", "AWS AppSync", "AWS CodePipeline"],
+        correctAnswer: "AWS Amplify",
+        explanation: "<b>AWS Amplify</b> is a platform that enables developers to build full-stack applications quickly with built-in features like authentication, storage, and APIs, while minimizing infrastructure management and accelerating development."
+    },
+    {
+        domain: "Technology",
+        question: "A manufacturing company needs a way to monitor its assembly-line equipment for any performance issues. Which AWS service can help them build a monitoring solution for the equipment?",
+        options: ["Amazon AppStream 2.0", "AWS IoT Core", "Amazon Connect", "AWS Well-Architected Tool"],
+        correctAnswer: "AWS IoT Core",
+        explanation: "<b>AWS IoT Core</b> is a managed cloud service that lets connected devices interact with cloud applications and other devices. It's perfect for monitoring industrial equipment and collecting performance data from assembly-line machinery."
+    },
+    {
+        domain: "Billing and Pricing",
+        question: "A company is using a large Amazon EC2 instance type for a low-traffic website, but monitoring shows CPU usage rarely exceeds 10 percent. What is a good next step?",
+        options: [
+            "Rightsize the EC2 instance to a smaller type to match the actual workload.",
+            "Automate the scaling of EC2 instances based on traffic.",
+            "Upgrade the EC2 instance for better data protection.",
+            "Decrease the number of instances to save money."
+        ],
+        correctAnswer: "Rightsize the EC2 instance to a smaller type to match the actual workload.",
+        explanation: "<b>Rightsizing</b> is a key cost optimization practice. When an instance is significantly oversized for its workload (only 10% CPU usage), switching to a smaller, appropriately-sized instance type will reduce costs while maintaining performance."
+    },
+    {
+        domain: "Technology",
+        question: "A small technology startup needs to provide its remote workforce with secure access to their work environment. The employees must be able to accomplish the same tasks as if they were on a physical office computer. Which AWS service can they use to provide this remote access?",
+        options: ["Amazon WorkSpaces", "Amazon AppStream 2.0", "Amazon Connect", "AWS AppSync"],
+        correctAnswer: "Amazon WorkSpaces",
+        explanation: "<b>Amazon WorkSpaces</b> is a fully managed desktop-as-a-service (DaaS) solution that provides secure, cloud-based virtual desktops. It allows remote workers to access their work environment from anywhere, just like using a physical office computer."
+    },
+    {
+        domain: "Cloud Concepts",
+        question: "A startup is hosting a critical web application on a single Amazon EC2 instance in one Availability Zone. After a brief outage, they decide to reevaluate their architecture. What practice from the AWS Well-Architected Framework could improve this situation?",
+        options: [
+            "Reduce resource usage to avoid overprovisioning (Cost Optimization).",
+            "Deploy instances across multiple Availability Zones for fault tolerance (Reliability).",
+            "Scale up the instance to handle more traffic (Performance Efficiency).", 
+            "Increase the instance's firewall protection (Security)."
+        ],
+        correctAnswer: "Deploy instances across multiple Availability Zones for fault tolerance (Reliability).",
+        explanation: "The <b>Reliability pillar</b> of the AWS Well-Architected Framework emphasizes designing systems that can automatically recover from failure. Deploying across multiple Availability Zones provides fault tolerance and prevents single points of failure."
+    },
+
+    // ################# ADDITIONAL STORAGE SERVICE QUESTIONS #################
+    
+    {
+        domain: "Billing and Pricing",
+        question: "What is a key characteristic of Amazon S3 storage classes pricing?",
+        options: [
+            "All storage classes cost the same but differ in retrieval speed.",
+            "All storage classes have the same minimum storage duration requirement.",
+            "Pricing varies based on storage costs, retrieval fees, and minimum storage durations.",
+            "Pricing is exclusively determined by the geographic region of the bucket."
+        ],
+        correctAnswer: "Pricing varies based on storage costs, retrieval fees, and minimum storage durations.",
+        explanation: "Amazon S3 storage classes have different pricing structures that vary based on <b>storage costs</b> (per GB), <b>retrieval fees</b> (per GB retrieved), and <b>minimum storage durations</b> (e.g., Glacier has minimum 90-day storage). This allows you to optimize costs based on access patterns."
+    },
+    {
+        domain: "Technology",
+        question: "Which statement BEST describes Amazon FSx?",
+        options: [
+            "A block storage service that provides high performance volumes for EC2 instances",
+            "A service used to set up private file sharing within an on-premises data center only",
+            "A fully managed service that provides cost-effective, scalable file storage built on widely used file systems",
+            "An object storage solution designed for archiving rarely accessed data"
+        ],
+        correctAnswer: "A fully managed service that provides cost-effective, scalable file storage built on widely used file systems",
+        explanation: "<b>Amazon FSx</b> is a fully managed file system service that supports popular file systems like Windows File Server and Lustre. It provides high-performance, scalable file storage optimized for compute workloads."
+    },
+    {
+        domain: "Technology",
+        question: "AnyCompany Technology needs to implement a centralized storage solution for their development team that allows multiple Amazon EC2 instances to access the same file system simultaneously. The solution needs to: provide a fully managed service, automatically scale, eliminate the need for capacity planning, support Linux-based applications with standard file system interfaces, maintain consistent low-latency access across development environments, and provide high durability without requiring complex replication setups. Which AWS storage service is BEST suited for this scenario?",
+        options: ["Amazon Elastic Block Storage (Amazon EBS)", "Amazon FSx", "Amazon Elastic File System (Amazon EFS)", "Amazon S3"],
+        correctAnswer: "Amazon Elastic File System (Amazon EFS)",
+        explanation: "<b>Amazon EFS</b> is perfect for this scenario as it provides a fully managed NFS file system that multiple EC2 instances can access simultaneously. It automatically scales, supports standard POSIX file system interfaces for Linux, and provides consistent performance with high durability built-in."
+    },
+    {
+        domain: "Technology",
+        question: "AnyCompany Software is deploying a critical production application on Amazon EC2 instances with several Amazon Elastic Block Store (Amazon EBS) volumes containing application code and customer data. The team is looking for an AWS service they can use to back up the data for their application. The solution needs to: create regular data backups, create duplicate environments for testing, create a disaster recovery strategy, create full or incremental backups without impacting application performance, and provide cost-effective for long-term storage. Which AWS service or feature would BEST meet the requirements in the scenario?",
+        options: ["Amazon Elastic File System (Amazon EFS)", "Amazon S3 Glacier Flexible Retrieval", "EBS snapshots", "Amazon FSx"],
+        correctAnswer: "EBS snapshots",
+        explanation: "<b>EBS snapshots</b> are specifically designed for backing up EBS volumes. They create incremental, point-in-time backups without impacting performance, can be automated for regular backups, support disaster recovery by restoring to new volumes, and are cost-effective as they only store changed blocks."
+    },
+
+    // ################# ADDITIONAL STORAGE & DEPLOYMENT QUESTIONS #################
+    
+    {
+        domain: "Technology",
+        question: "Which statement BEST describes AWS Storage Gateway?",
+        options: [
+            "A physical hardware appliance that must be installed in a data center",
+            "A migration tool that automatically transfers all on-premises data to the cloud",
+            "A virtual private network that creates secure connections between a data center and AWS",
+            "A hybrid cloud storage solution that provides on-premises applications with access to virtually unlimited cloud storage"
+        ],
+        correctAnswer: "A hybrid cloud storage solution that provides on-premises applications with access to virtually unlimited cloud storage",
+        explanation: "<b>AWS Storage Gateway</b> is a hybrid cloud storage service that connects on-premises environments to AWS cloud storage (S3, Glacier, EBS). It enables seamless integration between on-premises and cloud storage through a VM or hardware appliance."
+    },
+    {
+        domain: "Cloud Concepts",
+        question: "A nonprofit organization is migrating all of their resources to the AWS Cloud. They are trying to decide which AWS Region to deploy their resources to. Which option lists the factors the organization needs to consider when deciding where to place their cloud resources?",
+        options: [
+            "Compliance, proximity to customers, feature availability, and pricing",
+            "Software licensing, hardware specifications, cloud skillset of staff, and customer reviews",
+            "Server uptime, application performance, employee satisfaction, and office location",
+            "Network speed, data encryption, user interface, and storage capacity"
+        ],
+        correctAnswer: "Compliance, proximity to customers, feature availability, and pricing",
+        explanation: "When selecting an AWS Region, organizations should consider: <b>Compliance</b> (data residency requirements), <b>proximity to customers</b> (latency), <b>feature availability</b> (service availability), and <b>pricing</b> (regional cost differences)."
+    },
+    {
+        domain: "Technology",
+        question: "A team at a biomedical tech company is tasked with deploying a new medical application across multiple AWS Regions to help maintain high availability and fault tolerance. The application consists of several components, including a web server, a database, and a message queue. The deployment needs to be consistent and repeatable and should minimize manual errors through automation. Which approach is BEST suited for deploying this application according to the needs of automation and consistency?",
+        options: [
+            "Using the AWS Management Console to manually deploy each component in every Region",
+            "Combining console and programmatic approaches for different tiers of the application",
+            "Writing a script to programmatically deploy the application using the cloud provider's API",
+            "Using an Infrastructure as Code (IaC) service such as AWS CloudFormation to deploy the application"
+        ],
+        correctAnswer: "Using an Infrastructure as Code (IaC) service such as AWS CloudFormation to deploy the application",
+        explanation: "<b>AWS CloudFormation</b> provides Infrastructure as Code (IaC) capabilities, allowing you to define your entire infrastructure in templates. This ensures consistent, repeatable deployments across multiple regions while minimizing manual errors through automation."
+    },
+    {
+        domain: "Technology",
+        question: "AnyCompany AI is developing a machine learning application that requires extremely fast data processing for temporary model training datasets. The data is generated during training sessions and stored separately in persistent storage. The team is trying to determine the best storage solution to use alongside their application. The solution needs to meet the following criteria: highest possible I/O performance, directly attached to their Amazon EC2 instances, and temporary storage – data does not persist when instances are stopped or terminated. Which AWS service BEST meets the temporary storage needs described in this scenario?",
+        options: ["Amazon S3", "Amazon Elastic Block Store (Amazon EBS)", "Amazon EC2 instance store", "Amazon Elastic File System (Amazon EFS)"],
+        correctAnswer: "Amazon EC2 instance store",
+        explanation: "<b>Amazon EC2 instance store</b> provides the highest I/O performance as it's directly attached NVMe SSD storage. It's perfect for temporary data like ML training datasets since data doesn't persist when instances stop, and it offers the fastest possible storage performance."
+    },
+    {
+        domain: "Technology",
+        question: "AnyCompany Marketing needs a storage solution that they can use to distribute large collections of high-resolution images, videos, and design files for their clients' campaigns. Some assets are accessed frequently, whereas others are archived for occasional reference. The solution needs to meet the following criteria: unlimited storage capacity, high durability, easy file sharing through URLs, ability to organize assets by client and project, cost-efficient storage options, and security controls to prevent unauthorized access for specific assets. Which AWS service is BEST suited for the storage needs described in this scenario?",
+        options: ["Amazon Elastic File System (Amazon EFS)", "Amazon Elastic Block Storage (Amazon EBS)", "Amazon S3", "Amazon FSx"],
+        correctAnswer: "Amazon S3",
+        explanation: "<b>Amazon S3</b> is perfect for this use case as it provides virtually unlimited object storage, multiple storage classes for cost optimization, easy URL-based sharing, bucket/folder organization, fine-grained access controls, and 99.999999999% (11 9's) durability."
+    },
+    {
+        domain: "Technology",
+        question: "AnyCompany Commerce has recently migrated its main application to an Amazon EC2 instance in AWS. As their customer base expands, they are exploring storage solutions that can grow dynamically with the application's data needs. The solution needs to meet the following criteria: have persistent block storage that provides consistent low-latency performance, be able to be attached to and detached from the EC2 instance as needed, independently resize storage capacity without disrupting the instance, and create point-in-time backups to protect critical customer and inventory data. Which AWS storage service would BEST meet the requirements in the scenario?",
+        options: ["Amazon Elastic File System (Amazon EFS)", "Amazon Elastic Block Store (Amazon EBS)", "Amazon FSx", "Amazon S3"],
+        correctAnswer: "Amazon Elastic Block Store (Amazon EBS)",
+        explanation: "<b>Amazon EBS</b> provides persistent block storage that can be attached/detached from EC2 instances, offers consistent performance, can be resized independently without downtime, and supports point-in-time snapshots for backup and disaster recovery."
     }
 ]; 
