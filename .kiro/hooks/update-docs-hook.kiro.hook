@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Update Documentation",
+  "description": "Monitors changes to source files and prompts for documentation updates in README.md or docs folder",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "aws-flashcards-app/**/*.js",
+      "aws-flashcards-app/**/*.html",
+      "aws-flashcards-app/**/*.css"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "I noticed changes to source files in the aws-flashcards-app project. Please review these changes and update the README.md file accordingly to ensure documentation stays current. Consider the following:\n1. If new features were added, document them\n2. If existing functionality was modified, update relevant documentation\n3. If there are usage changes, update instructions\n4. Check if any screenshots or examples need updating\n\nPlease make appropriate documentation changes to keep everything in sync with the latest code."
+  }
+}
