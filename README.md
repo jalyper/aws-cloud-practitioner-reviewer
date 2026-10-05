@@ -2,6 +2,8 @@
 
 A comprehensive practice quiz application to help you prepare for the AWS Certified Cloud Practitioner exam. This app contains over 120 carefully crafted questions covering all four exam domains with real-world scenarios and detailed explanations.
 
+**Status:** finished. The app is complete and there is no planned work.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
